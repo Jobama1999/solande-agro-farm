@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLAND Agro Farm - Pisciculture Clarias Gariepinus</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --secondary: #06b6d4;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --darker: #020617;
+    --light: #f0f9ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--darker);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 5%;
+    background: rgba(2, 6, 23, 0.9);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+.logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.logo-text h1 {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+}
+.logo-text span {
+    color: var(--primary);
+    font-size: 0.9rem;
+    display: block;
+}
+.pad-badge {
+    background: linear-gradient(135deg, var(--accent), #d97706);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Hero */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 60px;
+    background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e3a5f 100%);
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="80" r="2" fill="rgba(14,165,233,0.3)"/><circle cx="50" cy="60" r="3" fill="rgba(14,165,233,0.2)"/><circle cx="80" cy="90" r="2" fill="rgba(14,165,233,0.3)"/><circle cx="30" cy="40" r="1.5" fill="rgba(14,165,233,0.2)"/><circle cx="70" cy="30" r="2.5" fill="rgba(14,165,233,0.2)"/></svg>');
+    background-size: 200px;
+    animation: float 20s infinite linear;
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50px); }
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+.hero h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+.hero h2 span {
+    color: var(--primary);
+    display: block;
+}
+.hero p {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(14, 165, 233, 0.4);
+}
+.btn-whatsapp {
+    background: #25d366;
+    color: white;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+}
+.btn-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+}
+
+/* Products */
+.products {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.section-title h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+.section-title h2 span {
+    color: var(--primary);
+}
+.section-title p {
+    color: #94a3b8;
+}
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.product-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+}
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.product-info {
+    padding: 1.5rem;
+}
+.product-info h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+.product-info p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+.product-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+.product-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+/* Pricing Table */
+.pricing {
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 30px;
+    padding: 40px 20px;
+    margin: 40px auto;
+    max-width: 800px;
+}
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+.price-table th,
+.price-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+}
+.price-table th {
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--primary);
+    font-weight: 600;
+}
+.price-table td {
+    color: #e2e8f0;
+}
+.price-highlight {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* About */
+.about {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.about img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.about h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.about h2 span {
+    color: var(--primary);
+}
+.about p {
+    color: #94a3b8;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+.about ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+.about ul li {
+    color: #e2e8f0;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.about ul li::before {
+    content: "✓";
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Contact & Social */
+.contact {
+    padding: 60px 5%;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.4);
+}
+.contact h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+.contact h2 span {
+    color: var(--primary);
+}
+.contact-info {
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: left;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #e2e8f0;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 12px;
+}
+.contact-item i {
+    width: 40px;
+    height: 40px;
+    background: rgba(14, 165, 233, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+.social-links a {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: white;
+}
+.social-links a:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+.whatsapp-social { background: #25d366; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+.instagram-social { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4); }
+.facebook-social { background: #1877f2; box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4); }
+.email-social { background: #ea4335; box-shadow: 0 5px 15px rgba(234, 67, 53, 0.4); }
+.tiktok-social { background: #000; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
+
+/* Floating WhatsApp */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    animation: pulse 2s infinite;
+    transition: transform 0.3s;
+}
+.floating-whatsapp:hover {
+    transform: scale(1.1);
+    animation: none;
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 10px 40px rgba(37, 211, 102, 0.7); }
+}
+
+/* Footer */
+footer {
+    background: rgba(2, 6, 23, 0.9);
+    border-top: 1px solid rgba(14, 165, 233, 0.2);
+    padding: 2rem 5%;
+    text-align: center;
+}
+.footer-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+footer p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+footer .pad-text {
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about { grid-template-columns: 1fr; }
+    .btn-group { flex-direction: column; align-items: center; }
+    .btn { width: 100%; justify-content: center; }
+    .logo-container { flex-wrap: wrap; }
+    .pad-badge { margin-left: 0; margin-top: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Logo Header -->
+<div class="logo-container">
+    <img src="https://kimi-web-img.moonshot.cn/img/584A3A08-E0F4-4F66-AAAF-134E4BFA05A4.jpg" alt="SOLAND Agro Farm Logo" class="logo-img">
+    <div class="logo-text">
+        <h1>SOLAND</h1>
+        <span>Agro Farm</span>
+    </div>
+    <span class="pad-badge">Haut Patronat PAD Concept</span>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="accueil">
+    <div class="hero-content">
+        <h2>SOLAND Agro <span>Farm</span></h2>
+        <p>Élevage de Clarias gariepinus (poisson-chat africain) — alevins de qualité et poissons de table frais, élevés dans les meilleures conditions pour votre satisfaction.</p>
+        <div class="btn-group">
+            <a href="#produits" class="btn btn-primary">
+                <i class="fas fa-box-open"></i> Voir nos produits
+            </a>
+            <a href="https://wa.me/243831165687" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Discuter sur WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="produits">
+    <div class="section-title">
+        <h2>Nos <span>Produits</span></h2>
+        <p>Spécialisés dans l'élevage de Clarias gariepinus</p>
+    </div>
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/myfishplant.com/b616c412281b776316ea17e8c7c84accdf22d943.jpg" alt="Clarias gariepinus">
+            <div class="product-info">
+                <h3>Clarias Gariepinus — Poissons de Table</h3>
+                <p>Poissons de table frais, élevés dans nos bassins avec des aliments de qualité. Chair ferme et savoureuse.</p>
+                <span class="price">8$ - 10$/kg</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/images.thefishsite.com/b8b494c200bb422288abc63ea78948dd00be37b7.jpg" alt="Alevins">
+            <div class="product-info">
+                <h3>Clarias Gariepinus — Alevins</h3>
+                <p>Alevins vigoureux et résistants, idéaux pour démarrer ou agrandir votre propre élevage. Haut taux de survie.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/alfirdoosfishfarm.com/1375f2d1010ede34f4a548c3da7074c401e9ca4c.jpg" alt="Commande en gros">
+            <div class="product-info">
+                <h3>Commande en Gros</h3>
+                <p>Pour restaurants, hôtels, revendeurs ou grands éleveurs. Tarifs dégressifs à partir de 8kg.</p>
+                <span class="price">8$/kg</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="tarifs">
+    <div class="section-title">
+        <h2>Nos <span>Tarifs</span></h2>
+        <p>Grille tarifaire transparente — Prix en USD</p>
+    </div>
+    <table class="price-table">
+        <thead>
+            <tr>
+                <th>Poids commandé</th>
+                <th>Prix au kilo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1 kg à 7 kg</td>
+                <td><span class="price-highlight">10 $ / kg</span></td>
+            </tr>
+            <tr>
+                <td>1 kg à 7 kg (tarif préférentiel)</td>
+                <td><span class="price-highlight">9 $ / kg</span></td>
+            </tr>
+            <tr>
+                <td>8 kg et plus</td>
+                <td><span class="price-highlight">8 $ / kg</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align: center; color: #94a3b8; margin-top: 1rem; font-size: 0.9rem;">
+        <i class="fas fa-info-circle" style="color: var(--primary);"></i> 
+        Pour les alevins, contactez-nous sur WhatsApp pour un devis personnalisé.
+    </p>
+</section>
+
+<!-- About -->
+<section class="about" id="apropos">
+    <div>
+        <img src="https://kimi-web-img.moonshot.cn/img/blogger.googleusercontent.com/79e74e006474d5c0290c4380c7b1bf1aab8b601a.jpg" alt="Notre ferme piscicole">
+    </div>
+    <div>
+        <h2>À Propos de <span>SOLAND Agro Farm</span></h2>
+        <p>SOLAND Agro Farm est une ferme piscicole spécialisée dans l'élevage de Clarias gariepinus, le poisson-chat africain réputé pour sa croissance rapide et sa chair savoureuse.</p>
+        <p>Nous mettons un point d'honneur à respecter les normes sanitaires et à nourrir nos poissons avec des aliments de qualité.</p>
+        <ul>
+            <li>Élevage 100% naturel et contrôlé</li>
+            <li>Alevins vigoureux avec haut taux de survie</li>
+            <li>Tarifs dégressifs dès 8 kg</li>
+            <li>Conseil technique pour débutants</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Contact & Social -->
+<section class="contact" id="contact">
+    <div class="section-title">
+        <h2>Contactez-<span>Nous</span></h2>
+        <p>Suivez-nous sur les réseaux sociaux et commandez via WhatsApp</p>
+    </div>
+    
+    <div class="contact-info">
+        <div class="contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <div><strong>WhatsApp</strong><br>+243 831 165 687</div>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div><strong>Localisation</strong><br>République Démocratique du Congo</div>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <div><strong>Horaires</strong><br>Lun - Dim : 7h00 - 19h00</div>
+        </div>
+    </div>
+    
+    <h3 style="color: #fff; margin: 2rem 0 1rem;">Nos Réseaux Sociaux</h3>
+    <div class="social-links">
+        <a href="https://wa.me/243831165687" class="whatsapp-social" target="_blank" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/jobamatitan" class="instagram-social" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100088232693839" class="facebook-social" target="_blank" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="mailto:kabwejob552@gmail.com" class="email-social" title="Email Gmail 1">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="mailto:contact.pad2026@gmail.com" class="email-social" title="Email Gmail 2" style="background: #d93025;">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.tiktok.com/@job_kabwe" class="tiktok-social" target="_blank" title="TikTok">
+            <i class="fab fa-tiktok"></i>
+        </a>
+    </div>
+    
+    <a href="https://wa.me/243831165687" class="btn btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+    </a>
+</section>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/243831165687" class="floating-whatsapp" target="_blank" title="Discuter sur WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Footer -->
+<footer>
+    <img src="https://kimi-web-img.moonshot.cn/img/584A3A08-E0F4-4F66-AAAF-134E4BFA05A4.jpg" alt="SOLAND Logo" class="footer-logo">
+    <p>Clarias gariepinus de qualité — Alevins & Poissons de table</p>
+    <p class="pad-text">SOLAND Agro Farm — Sous le haut patronat de PAD Concept</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem;">© 2026 SOLAND Agro Farm. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>
