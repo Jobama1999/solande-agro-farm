@@ -1,0 +1,583 @@
+
+# ============================================
+# PAGE 5: GALERIE (galerie.html)
+# ============================================
+
+galerie_html = '''<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie - SOLAND Agro Farm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --secondary: #06b6d4;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --darker: #020617;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--darker);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+.nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.nav-logo-text h1 {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-logo-text span {
+    color: var(--primary);
+    font-size: 0.8rem;
+    display: block;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+/* Hero */
+.hero {
+    padding: 140px 5% 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e3a5f 100%);
+}
+.hero h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.hero h2 span {
+    color: var(--primary);
+}
+.hero p {
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* Gallery */
+.gallery {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.gallery-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.gallery-tab {
+    padding: 0.8rem 1.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 50px;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+.gallery-tab:hover, .gallery-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.gallery-item {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
+.gallery-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(14, 165, 233, 0.2);
+}
+.gallery-img {
+    height: 220px;
+    background: linear-gradient(135deg, #1e3a5f, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+.gallery-info {
+    padding: 1.5rem;
+}
+.gallery-info h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+.gallery-info p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Video Section */
+.videos {
+    padding: 60px 5%;
+    background: rgba(15, 23, 42, 0.4);
+    text-align: center;
+}
+.videos h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+.videos h2 span {
+    color: var(--primary);
+}
+.video-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.video-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+.video-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+.video-placeholder {
+    height: 200px;
+    background: linear-gradient(135deg, #1e3a5f, #0f172a);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+}
+.video-placeholder i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+.video-info {
+    padding: 1.5rem;
+}
+.video-info h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+.video-info p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    background: rgba(2, 6, 23, 0.95);
+    border-top: 1px solid rgba(14, 165, 233, 0.2);
+    padding: 3rem 5% 1rem;
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.footer-section h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.footer-section p, .footer-section a {
+    color: #94a3b8;
+    text-decoration: none;
+    line-height: 1.8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.footer-section a:hover {
+    color: var(--primary);
+}
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+.whatsapp-social { background: #25d366; }
+.instagram-social { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.facebook-social { background: #1877f2; }
+.email-social { background: #ea4335; }
+.tiktok-social { background: #000; border: 1px solid #fff; }
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu { display: block; }
+    .hero h2 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">S</div>
+        <div class="nav-logo-text">
+            <h1>SOLAND</h1>
+            <span>Agro Farm</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="galerie.html" class="active">Galerie</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-menu" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2>Notre <span>Galerie</span></h2>
+    <p>Découvrez nos fermes, nos produits et notre quotidien à travers photos et vidéos</p>
+</section>
+
+<section class="gallery">
+    <div class="gallery-tabs">
+        <div class="gallery-tab active" onclick="showGallery('ferme')">🏞️ La Ferme</div>
+        <div class="gallery-tab" onclick="showGallery('pisciculture')">🐟 Pisciculture</div>
+        <div class="gallery-tab" onclick="showGallery('aviculture')">🐔 Aviculture</div>
+        <div class="gallery-tab" onclick="showGallery('agriculture')">🌾 Agriculture</div>
+    </div>
+    
+    <div class="gallery-grid" id="ferme">
+        <div class="gallery-item">
+            <div class="gallery-img">🏞️</div>
+            <div class="gallery-info">
+                <h3>Vue panoramique de la ferme</h3>
+                <p>Nos installations à N'sele Bibwa Plaza</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🏗️</div>
+            <div class="gallery-info">
+                <h3>Bassins principaux</h3>
+                <p>Infrastructure de pisciculture</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🌳</div>
+            <div class="gallery-info">
+                <h3>Zones vertes</h3>
+                <p>Espaces agricoles et cultures</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">👷</div>
+            <div class="gallery-info">
+                <h3>L'équipe au travail</h3>
+                <p>Notre personnel dévoué</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="gallery-grid" id="pisciculture" style="display:none;">
+        <div class="gallery-item">
+            <div class="gallery-img">🐟</div>
+            <div class="gallery-info">
+                <h3>Clarias Gariepinus</h3>
+                <p>Poissons de table prêts pour la vente</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🐠</div>
+            <div class="gallery-info">
+                <h3>Alevins</h3>
+                <p>Jeunes poissons pour l'élevage</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">💧</div>
+            <div class="gallery-info">
+                <h3>Bassins d'élevage</h3>
+                <p>Conditions optimales de croissance</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🎣</div>
+            <div class="gallery-info">
+                <h3>Récolte</h3>
+                <p>Pêche et préparation des commandes</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="gallery-grid" id="aviculture" style="display:none;">
+        <div class="gallery-item">
+            <div class="gallery-img">🐔</div>
+            <div class="gallery-info">
+                <h3>Poulets de chair</h3>
+                <p>Élevage en plein air</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🥚</div>
+            <div class="gallery-info">
+                <h3>Production d'œufs</h3>
+                <p>Œufs frais du jour</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🐤</div>
+            <div class="gallery-info">
+                <h3>Poussins</h3>
+                <p>Jeunes poulets pour l'élevage</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="gallery-grid" id="agriculture" style="display:none;">
+        <div class="gallery-item">
+            <div class="gallery-img">🌽</div>
+            <div class="gallery-info">
+                <h3>Culture de maïs</h3>
+                <p>Champs de maïs en saison</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🥬</div>
+            <div class="gallery-info">
+                <h3>Légumes frais</h3>
+                <p>Diversité de cultures potagères</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img">🍠</div>
+            <div class="gallery-info">
+                <h3>Manioc</h3>
+                <p>Récolte de tubercules</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="videos">
+    <h2>Nos <span>Vidéos</span></h2>
+    <div class="video-grid">
+        <div class="video-card">
+            <div class="video-placeholder">
+                <i class="fas fa-play-circle"></i>
+                <p>Visite de la ferme</p>
+            </div>
+            <div class="video-info">
+                <h3>Tour complet de SOLAND Agro Farm</h3>
+                <p>Découvrez nos installations de A à Z</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <div class="video-placeholder">
+                <i class="fas fa-play-circle"></i>
+                <p>Processus de production</p>
+            </div>
+            <div class="video-info">
+                <h3>De l'alevin au poisson de table</h3>
+                <p>Toutes les étapes de notre élevage</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <div class="video-placeholder">
+                <i class="fas fa-play-circle"></i>
+                <p>Témoignages clients</p>
+            </div>
+            <div class="video-info">
+                <h3>Ce que disent nos clients</h3>
+                <p>Avis et retours d'expérience</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>SOLAND Agro Farm</h3>
+            <p>Votre partenaire de confiance en élevage et agriculture en RDC.</p>
+            <div class="social-links">
+                <a href="https://wa.me/243831165687" class="whatsapp-social" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/jobamatitan" class="instagram-social" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100088232693839" class="facebook-social" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:kabwejob552@gmail.com" class="email-social"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.tiktok.com/@job_kabwe" class="tiktok-social" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Navigation</h3>
+            <a href="index.html">Accueil</a>
+            <a href="a-propos.html">À Propos</a>
+            <a href="produits.html">Produits</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p><i class="fab fa-whatsapp" style="color: #25d366;"></i> +243 831 165 687</p>
+            <p><i class="fas fa-envelope" style="color: #ea4335;"></i> kabwejob552@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> N'sele Bibwa Plaza, Kinshasa</p>
+        </div>
+        <div class="footer-section">
+            <h3>Partenaire</h3>
+            <p><strong style="color: var(--accent);">PAD Concept</strong></p>
+            <p>Haut patronat de SOLAND Agro Farm</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 SOLAND Agro Farm. Tous droits réservés. | Sous le haut patronat de PAD Concept</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+    } else {
+        nav.style.display = 'flex';
+        nav.style.position = 'absolute';
+        nav.style.top = '100%';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.flexDirection = 'column';
+        nav.style.background = 'rgba(2, 6, 23, 0.95)';
+        nav.style.padding = '1rem';
+        nav.style.gap = '1rem';
+    }
+}
+
+function showGallery(category) {
+    document.getElementById('ferme').style.display = 'none';
+    document.getElementById('pisciculture').style.display = 'none';
+    document.getElementById('aviculture').style.display = 'none';
+    document.getElementById('agriculture').style.display = 'none';
+    document.getElementById(category).style.display = 'grid';
+    
+    document.querySelectorAll('.gallery-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>'''
+
+with open('/mnt/agents/output/galerie.html', 'w', encoding='utf-8') as f:
+    f.write(galerie_html)
+
+print("Page Galerie créée avec succès !")

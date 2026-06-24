@@ -1,0 +1,643 @@
+
+# ============================================
+# PAGE 3: PRODUITS (produits.html)
+# ============================================
+
+produits_html = '''<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Produits - SOLAND Agro Farm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --secondary: #06b6d4;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --darker: #020617;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--darker);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+.nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.nav-logo-text h1 {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-logo-text span {
+    color: var(--primary);
+    font-size: 0.8rem;
+    display: block;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+/* Hero */
+.hero {
+    padding: 140px 5% 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e3a5f 100%);
+}
+.hero h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.hero h2 span {
+    color: var(--primary);
+}
+.hero p {
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* Category Tabs */
+.categories {
+    padding: 40px 5%;
+    text-align: center;
+}
+.cat-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.cat-tab {
+    padding: 0.8rem 1.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 50px;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+.cat-tab:hover, .cat-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+/* Products Grid */
+.products-section {
+    padding: 40px 5% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+.product-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+}
+.product-image {
+    height: 200px;
+    background: linear-gradient(135deg, #1e3a5f, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+}
+.product-info {
+    padding: 1.5rem;
+}
+.product-info h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.product-info p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+.product-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+.product-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+/* Pricing Table */
+.pricing-section {
+    padding: 60px 5%;
+    background: rgba(15, 23, 42, 0.4);
+}
+.pricing-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+.pricing-content h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+.pricing-content h2 span {
+    color: var(--primary);
+}
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+.price-table th,
+.price-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+}
+.price-table th {
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--primary);
+    font-weight: 600;
+}
+.price-table td {
+    color: #e2e8f0;
+}
+.price-highlight {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Footer */
+footer {
+    background: rgba(2, 6, 23, 0.95);
+    border-top: 1px solid rgba(14, 165, 233, 0.2);
+    padding: 3rem 5% 1rem;
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.footer-section h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.footer-section p, .footer-section a {
+    color: #94a3b8;
+    text-decoration: none;
+    line-height: 1.8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.footer-section a:hover {
+    color: var(--primary);
+}
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+.whatsapp-social { background: #25d366; }
+.instagram-social { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.facebook-social { background: #1877f2; }
+.email-social { background: #ea4335; }
+.tiktok-social { background: #000; border: 1px solid #fff; }
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu { display: block; }
+    .hero h2 { font-size: 2rem; }
+    .cat-tabs { flex-direction: column; align-items: center; }
+    .cat-tab { width: 100%; max-width: 300px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">S</div>
+        <div class="nav-logo-text">
+            <h1>SOLAND</h1>
+            <span>Agro Farm</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="produits.html" class="active">Produits</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-menu" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2>Nos <span>Produits</span></h2>
+    <p>Découvrez notre catalogue complet de produits frais et de qualité, élevés et cultivés dans nos fermes</p>
+</section>
+
+<section class="categories">
+    <div class="cat-tabs">
+        <div class="cat-tab active" onclick="showCategory('pisciculture')">🐟 Pisciculture</div>
+        <div class="cat-tab" onclick="showCategory('aviculture')">🐔 Aviculture</div>
+        <div class="cat-tab" onclick="showCategory('porciculture')">🐷 Porciculture</div>
+        <div class="cat-tab" onclick="showCategory('agriculture')">🌾 Agriculture</div>
+    </div>
+</section>
+
+<section class="products-section" id="pisciculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <div class="product-image">🐟</div>
+            <div class="product-info">
+                <h3>Clarias Gariepinus - Poissons de Table</h3>
+                <p>Poissons frais élevés dans nos bassins avec des aliments de qualité. Chair ferme et savoureuse.</p>
+                <span class="price">8$ - 10$/kg</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🐠</div>
+            <div class="product-info">
+                <h3>Clarias Gariepinus - Alevins</h3>
+                <p>Alevins vigoureux et résistants, idéaux pour démarrer ou agrandir votre propre élevage.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🥚</div>
+            <div class="product-info">
+                <h3>Œufs de Clarias (Fécondés)</h3>
+                <p>Œufs fécondés de haute qualité pour l'incubation et la reproduction.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">📦</div>
+            <div class="product-info">
+                <h3>Commande en Gros</h3>
+                <p>Pour restaurants, hôtels, revendeurs. Tarifs dégressifs à partir de 8kg.</p>
+                <span class="price">8$/kg</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="aviculture" style="display:none;">
+    <div class="products-grid">
+        <div class="product-card">
+            <div class="product-image">🐔</div>
+            <div class="product-info">
+                <h3>Poulets de Chair</h3>
+                <p>Poulets élevés en plein air, nourris naturellement. Chair tendre et savoureuse.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🥚</div>
+            <div class="product-info">
+                <h3>Œufs Frais</h3>
+                <p>Œufs frais du jour, de poules élevées en plein air. Riches en nutriments.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🐤</div>
+            <div class="product-info">
+                <h3>Poussins</h3>
+                <p>Poussins de qualité pour démarrer votre élevage. Différentes races disponibles.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="porciculture" style="display:none;">
+    <div class="products-grid">
+        <div class="product-card">
+            <div class="product-image">🐷</div>
+            <div class="product-info">
+                <h3>Porcs à l'Engrais</h3>
+                <p>Porcs élevés dans de bonnes conditions sanitaires. Viande de qualité supérieure.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🐽</div>
+            <div class="product-info">
+                <h3>Cochons de Lait</h3>
+                <p>Jeunes cochons pour la reproduction ou la consommation. En bonne santé.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="agriculture" style="display:none;">
+    <div class="products-grid">
+        <div class="product-card">
+            <div class="product-image">🌽</div>
+            <div class="product-info">
+                <h3>Maïs</h3>
+                <p>Maïs cultivé localement, récolté à maturité. Grains pleins et nourrissants.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🥬</div>
+            <div class="product-info">
+                <h3>Légumes Frais</h3>
+                <p>Variété de légumes de saison, cultivés sans pesticides. Fraîcheur garantie.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">🍠</div>
+            <div class="product-info">
+                <h3>Manioc / Igname</h3>
+                <p>Tubercules de qualité, récoltés à la main. Base de l'alimentation locale.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing-section">
+    <div class="pricing-content">
+        <h2>Grille <span>Tarifaire</span> - Pisciculture</h2>
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Poids commandé</th>
+                    <th>Prix au kilo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 kg à 7 kg</td>
+                    <td><span class="price-highlight">10 $ / kg</span></td>
+                </tr>
+                <tr>
+                    <td>1 kg à 7 kg (tarif préférentiel)</td>
+                    <td><span class="price-highlight">9 $ / kg</span></td>
+                </tr>
+                <tr>
+                    <td>8 kg et plus</td>
+                    <td><span class="price-highlight">8 $ / kg</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="color: #94a3b8; margin-top: 1rem;">Pour les autres produits, contactez-nous sur WhatsApp pour un devis personnalisé.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>SOLAND Agro Farm</h3>
+            <p>Votre partenaire de confiance en élevage et agriculture en RDC.</p>
+            <div class="social-links">
+                <a href="https://wa.me/243831165687" class="whatsapp-social" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/jobamatitan" class="instagram-social" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100088232693839" class="facebook-social" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:kabwejob552@gmail.com" class="email-social"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.tiktok.com/@job_kabwe" class="tiktok-social" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Navigation</h3>
+            <a href="index.html">Accueil</a>
+            <a href="a-propos.html">À Propos</a>
+            <a href="produits.html">Produits</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p><i class="fab fa-whatsapp" style="color: #25d366;"></i> +243 831 165 687</p>
+            <p><i class="fas fa-envelope" style="color: #ea4335;"></i> kabwejob552@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> N'sele Bibwa Plaza, Kinshasa</p>
+        </div>
+        <div class="footer-section">
+            <h3>Partenaire</h3>
+            <p><strong style="color: var(--accent);">PAD Concept</strong></p>
+            <p>Haut patronat de SOLAND Agro Farm</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 SOLAND Agro Farm. Tous droits réservés. | Sous le haut patronat de PAD Concept</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+    } else {
+        nav.style.display = 'flex';
+        nav.style.position = 'absolute';
+        nav.style.top = '100%';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.flexDirection = 'column';
+        nav.style.background = 'rgba(2, 6, 23, 0.95)';
+        nav.style.padding = '1rem';
+        nav.style.gap = '1rem';
+    }
+}
+
+function showCategory(category) {
+    // Hide all sections
+    document.getElementById('pisciculture').style.display = 'none';
+    document.getElementById('aviculture').style.display = 'none';
+    document.getElementById('porciculture').style.display = 'none';
+    document.getElementById('agriculture').style.display = 'none';
+    
+    // Show selected section
+    document.getElementById(category).style.display = 'block';
+    
+    // Update active tab
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>'''
+
+with open('/mnt/agents/output/produits.html', 'w', encoding='utf-8') as f:
+    f.write(produits_html)
+
+print("Page Produits créée avec succès !")

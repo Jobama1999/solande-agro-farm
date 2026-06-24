@@ -1,0 +1,471 @@
+
+# ============================================
+# PAGE 7: FAQ (faq.html)
+# ============================================
+
+faq_html = '''<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - SOLAND Agro Farm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --secondary: #06b6d4;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --darker: #020617;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--darker);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+.nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.nav-logo-text h1 {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-logo-text span {
+    color: var(--primary);
+    font-size: 0.8rem;
+    display: block;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+/* Hero */
+.hero {
+    padding: 140px 5% 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e3a5f 100%);
+}
+.hero h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.hero h2 span {
+    color: var(--primary);
+}
+.hero p {
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* FAQ */
+.faq {
+    padding: 60px 5%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.faq-item {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+.faq-item:hover {
+    border-color: var(--primary);
+}
+.faq-question {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.faq-question i {
+    color: var(--primary);
+    transition: transform 0.3s;
+}
+.faq-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+    color: #94a3b8;
+    line-height: 1.8;
+}
+.faq-answer.active {
+    padding: 0 1.5rem 1.5rem;
+    max-height: 500px;
+}
+.faq-question.active i {
+    transform: rotate(180deg);
+}
+
+/* CTA */
+.cta {
+    padding: 60px 5%;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(6, 182, 212, 0.1));
+}
+.cta h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.cta p {
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.btn-whatsapp {
+    background: #25d366;
+    color: white;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+}
+
+/* Footer */
+footer {
+    background: rgba(2, 6, 23, 0.95);
+    border-top: 1px solid rgba(14, 165, 233, 0.2);
+    padding: 3rem 5% 1rem;
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.footer-section h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.footer-section p, .footer-section a {
+    color: #94a3b8;
+    text-decoration: none;
+    line-height: 1.8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.footer-section a:hover {
+    color: var(--primary);
+}
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+.whatsapp-social { background: #25d366; }
+.instagram-social { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.facebook-social { background: #1877f2; }
+.email-social { background: #ea4335; }
+.tiktok-social { background: #000; border: 1px solid #fff; }
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu { display: block; }
+    .hero h2 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">S</div>
+        <div class="nav-logo-text">
+            <h1>SOLAND</h1>
+            <span>Agro Farm</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="a-propos.html">À Propos</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="faq.html" class="active">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-menu" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2>Questions <span>Fréquentes</span></h2>
+    <p>Trouvez rapidement les réponses à vos questions sur SOLAND Agro Farm</p>
+</section>
+
+<section class="faq">
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Comment passer commande ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Vous pouvez passer commande directement via WhatsApp au +243 831 165 687. Envoyez-nous votre liste de produits souhaités, la quantité et votre localisation. Nous vous confirmerons la disponibilité et les modalités de livraison.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Quels sont les modes de paiement acceptés ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Nous acceptons les paiements en espèces à la livraison, les transferts bancaires et les paiements mobiles (Airtel Money, Orange Money, M-Pesa). Pour les commandes en gros, un acompte peut être demandé.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Livrez-vous à domicile ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Oui, nous livrons à domicile dans Kinshasa et ses environs. Les frais de livraison dépendent de votre localisation. Pour les commandes importantes, la livraison peut être gratuite. Contactez-nous pour un devis personnalisé.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Comment conserver les poissons frais ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Conservez les poissons au réfrigérateur (0-4°C) et consommez-les dans les 48 heures pour une fraîcheur optimale. Pour une conservation plus longue, vous pouvez les congeler. Nous vous conseillons de les nettoyer avant conservation.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Quelle est la garantie sur les alevins ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Nous garantissons un taux de survie de 95% pour nos alevins lors de la livraison. En cas de mortalité anormale dans les 24 heures suivant la réception, nous procédons au remplacement. Suivez nos conseils d'acclimatation pour de meilleurs résultats.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Proposez-vous des formations ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Oui, nous proposons des formations pratiques en pisciculture, aviculture et élevage porcin. Les formations se déroulent sur notre ferme à N'sele et incluent théorie et pratique. Contactez-nous pour les dates et tarifs.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Puis-je visiter la ferme ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Oui, les visites sont possibles sur rendez-vous du lundi au dimanche de 7h00 à 19h00. Contactez-nous au moins 48h à l'avance pour planifier votre visite. L'entrée est gratuite pour les clients et prospects sérieux.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Quels sont vos horaires d'ouverture ?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Nous sommes ouverts 7 jours sur 7, de 7h00 à 19h00. Les commandes peuvent être passées à tout moment via WhatsApp, mais les livraisons et retraits se font pendant nos heures d'ouverture.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Vous avez encore des questions ?</h2>
+    <p>N'hésitez pas à nous contacter directement sur WhatsApp. Nous répondons rapidement !</p>
+    <a href="https://wa.me/243831165687" class="btn btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Nous contacter sur WhatsApp
+    </a>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>SOLAND Agro Farm</h3>
+            <p>Votre partenaire de confiance en élevage et agriculture en RDC.</p>
+            <div class="social-links">
+                <a href="https://wa.me/243831165687" class="whatsapp-social" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/jobamatitan" class="instagram-social" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100088232693839" class="facebook-social" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:kabwejob552@gmail.com" class="email-social"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.tiktok.com/@job_kabwe" class="tiktok-social" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Navigation</h3>
+            <a href="index.html">Accueil</a>
+            <a href="a-propos.html">À Propos</a>
+            <a href="produits.html">Produits</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p><i class="fab fa-whatsapp" style="color: #25d366;"></i> +243 831 165 687</p>
+            <p><i class="fas fa-envelope" style="color: #ea4335;"></i> kabwejob552@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> N'sele Bibwa Plaza, Kinshasa</p>
+        </div>
+        <div class="footer-section">
+            <h3>Partenaire</h3>
+            <p><strong style="color: var(--accent);">PAD Concept</strong></p>
+            <p>Haut patronat de SOLAND Agro Farm</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 SOLAND Agro Farm. Tous droits réservés. | Sous le haut patronat de PAD Concept</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+    } else {
+        nav.style.display = 'flex';
+        nav.style.position = 'absolute';
+        nav.style.top = '100%';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.flexDirection = 'column';
+        nav.style.background = 'rgba(2, 6, 23, 0.95)';
+        nav.style.padding = '1rem';
+        nav.style.gap = '1rem';
+    }
+}
+
+function toggleFaq(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
+    
+    if (answer.classList.contains('active')) {
+        answer.classList.remove('active');
+        element.classList.remove('active');
+    } else {
+        // Close all others
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+        document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+        
+        answer.classList.add('active');
+        element.classList.add('active');
+    }
+}
+</script>
+
+</body>
+</html>'''
+
+with open('/mnt/agents/output/faq.html', 'w', encoding='utf-8') as f:
+    f.write(faq_html)
+
+print("Page FAQ créée avec succès !")
