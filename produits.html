@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Produits - SOLAND Agro Farm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --darker: #020617;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--darker);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+.nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.nav-logo-text h1 {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-logo-text span {
+    color: var(--primary);
+    font-size: 0.8rem;
+    display: block;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+}
+.nav-links a.active {
+    color: var(--primary);
+}
+.hero {
+    padding: 140px 5% 40px;
+    text-align: center;
+}
+.hero h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.hero h2 span {
+    color: var(--primary);
+}
+.categories {
+    padding: 20px 5%;
+    text-align: center;
+}
+.cat-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.cat-tab {
+    padding: 0.8rem 1.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 50px;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    font-size: 1rem;
+}
+.cat-tab:hover, .cat-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+.products-section {
+    padding: 40px 5% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+.product-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+}
+.product-image {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+.product-info {
+    padding: 1.5rem;
+}
+.product-info h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.product-info p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    min-height: 40px;
+}
+.price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+.product-btn {
+    padding: 0.6rem 1.2rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.product-btn:hover {
+    background: #128C7E;
+    transform: scale(1.05);
+}
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">S</div>
+        <div class="nav-logo-text">
+            <h1>SOLAND</h1>
+            <span>Agro Farm</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="produits.html" class="active">Produits</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h2>Nos <span>Produits</span></h2>
+    <p>Clique sur une catégorie pour voir les produits avec photos et prix</p>
+</section>
+
+<section class="categories">
+    <div class="cat-tabs">
+        <div class="cat-tab active" onclick="showCategory('pisciculture', this)">🐟 Pisciculture</div>
+        <div class="cat-tab" onclick="showCategory('aviculture', this)">🐔 Aviculture</div>
+        <div class="cat-tab" onclick="showCategory('porciculture', this)">🐷 Porciculture</div>
+        <div class="cat-tab" onclick="showCategory('agriculture', this)">🌾 Agriculture</div>
+    </div>
+</section>
+
+<section class="products-section" id="pisciculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="59351806-6363-4863-9991-F9C0F5CEF9EC.png" alt="Alevins de silure" class="product-image">
+            <div class="product-info">
+                <h3>Alevins de Silure</h3>
+                <p>Alevins de qualité pour empoissonnement de vos étangs. Croissance rapide.</p>
+                <span class="price">0.50$ / alevin</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20veux%20des%20alevins%20de%20silure" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="IMG_0206.jpeg" alt="Clarias adulte" class="product-image">
+            <div class="product-info">
+                <h3>Silures de Consommation</h3>
+                <p>Poissons frais, élevés sans antibiotiques. Vente au kg ou à la pièce.</p>
+                <span class="price">8$ / kg</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20commande%20du%20silure" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="IMG_0207.jpeg" alt="Clarias prêt à cuire" class="product-image">
+            <div class="product-info">
+                <h3>Clarias Prêts à Cuire</h3>
+                <p>Poissons vidés et nettoyés sur demande. Fraîcheur garantie.</p>
+                <span class="price">9$ / kg</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20veux%20du%20clarias%20prêt%20à%20cuire" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section hidden" id="aviculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="1AA39246-1997-4FF4-B3EC-892A1673D9B8.png" alt="Poules" class="product-image">
+            <div class="product-info">
+                <h3>Poulet de Chair</h3>
+                <p>Poulets élevés en plein air, 2.5 à 3 kg. Chair tendre et savoureuse.</p>
+                <span class="price">10$ / pièce</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20commande%20poulet%20de%20chair%202.5-3kg" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="1AA39246-1997-4FF4-B3EC-892A1673D9B8.png" alt="Œufs" class="product-image">
+            <div class="product-info">
+                <h3>Œufs Frais</h3>
+                <p>Œufs frais du jour, de poules élevées en plein air. Plateau de 30 pièces.</p>
+                <span class="price">6.50$ / plateau</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20commande%20plateau%20d'œufs%206.5$" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section hidden" id="porciculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="98285067-A0B0-4644-B65D-437EC8FED278.png" alt="Porcs engraissement" class="product-image">
+            <div class="product-info">
+                <h3>Porc d'Engraissement</h3>
+                <p>Porcs 40 à 60 kg, élevés dans de bonnes conditions sanitaires.</p>
+                <span class="price">5$ / kg vif</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20porc%20engraissement%2040-60kg" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="98285067-A0B0-4644-B65D-437EC8FED278.png" alt="Porcelets" class="product-image">
+            <div class="product-info">
+                <h3>Porcelets Sevrés</h3>
+                <p>Jeunes cochons 20 à 35 kg pour reproduction ou engraissement. Races améliorées.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20porcelets%2020-35kg" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="98285067-A0B0-4644-B65D-437EC8FED278.png" alt="Truie" class="product-image">
+            <div class="product-info">
+                <h3>Porc Adulte Reproduction</h3>
+                <p>Truies et verrats 100 kg et plus pour élevage et reproduction.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20porc%20reproduction%20100kg+" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section hidden" id="agriculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="289F2A87-B008-4E8D-9F16-60D3DF0F5E86.png" alt="Légumes" class="product-image">
+            <div class="product-info">
+                <h3>Légumes Frais Bio</h3>
+                <p>Tomates, salades, choux... Produits 100% bio de notre ferme.</p>
+                <span class="price">Prix selon commande</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20légumes%20disponibles%20et%20prix%20du%20jour" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="289F2A87-B008-4E8D-9F16-60D3DF0F5E86.png" alt="Maïs" class="product-image">
+            <div class="product-info">
+                <h3>Maïs</h3>
+                <p>Maïs cultivé localement, grains pleins et nourrissants.</p>
+                <span class="price">Prix selon commande</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20maïs%20et%20prix" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function showCategory(category, element) {
+    document.querySelectorAll('.products-section').forEach(sec => {
+        sec.classList.add('hidden');
+    });
+    document.getElementById(category).classList.remove('hidden');
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    element.classList.add('active');
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Produits - SOLAND Agro Farm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --darker: #020617;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--darker);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+.nav-logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.nav-logo-text h1 {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 700;
+}
+.nav-logo-text span {
+    color: var(--primary);
+    font-size: 0.8rem;
+    display: block;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+}
+.nav-links a.active {
+    color: var(--primary);
+}
+.hero {
+    padding: 140px 5% 40px;
+    text-align: center;
+}
+.hero h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.hero h2 span {
+    color: var(--primary);
+}
+.categories {
+    padding: 20px 5%;
+    text-align: center;
+}
+.cat-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.cat-tab {
+    padding: 0.8rem 1.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 50px;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    font-size: 1rem;
+}
+.cat-tab:hover, .cat-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+.products-section {
+    padding: 40px 5% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+.product-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+}
+.product-image {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+.product-info {
+    padding: 1.5rem;
+}
+.product-info h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.product-info p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    min-height: 40px;
+}
+.price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+.product-btn {
+    padding: 0.6rem 1.2rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.product-btn:hover {
+    background: #128C7E;
+    transform: scale(1.05);
+}
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">S</div>
+        <div class="nav-logo-text">
+            <h1>SOLAND</h1>
+            <span>Agro Farm</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="produits.html" class="active">Produits</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h2>Nos <span>Produits</span></h2>
+    <p>Clique sur une catégorie pour voir les produits avec photos et prix</p>
+</section>
+
+<section class="categories">
+    <div class="cat-tabs">
+        <div class="cat-tab active" onclick="showCategory('pisciculture', this)">🐟 Pisciculture</div>
+        <div class="cat-tab" onclick="showCategory('aviculture', this)">🐔 Aviculture</div>
+        <div class="cat-tab" onclick="showCategory('porciculture', this)">🐷 Porciculture</div>
+        <div class="cat-tab" onclick="showCategory('agriculture', this)">🌾 Agriculture</div>
+    </div>
+</section>
+
+<section class="products-section" id="pisciculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="59351806-6363-4863-9991-F9C0F5CEF9EC.png" alt="Alevins de silure" class="product-image">
+            <div class="product-info">
+                <h3>Alevins de Silure</h3>
+                <p>Alevins de qualité pour empoissonnement de vos étangs. Croissance rapide.</p>
+                <span class="price">0.50$ / alevin</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20veux%20des%20alevins%20de%20silure" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="IMG_0206.jpeg" alt="Clarias adulte" class="product-image">
+            <div class="product-info">
+                <h3>Silures de Consommation</h3>
+                <p>Poissons frais, élevés sans antibiotiques. Vente au kg ou à la pièce.</p>
+                <span class="price">8$ / kg</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20commande%20du%20silure" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="IMG_0207.jpeg" alt="Clarias prêt à cuire" class="product-image">
+            <div class="product-info">
+                <h3>Clarias Prêts à Cuire</h3>
+                <p>Poissons vidés et nettoyés sur demande. Fraîcheur garantie.</p>
+                <span class="price">9$ / kg</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20veux%20du%20clarias%20prêt%20à%20cuire" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section hidden" id="aviculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="1AA39246-1997-4FF4-B3EC-892A1673D9B8.png" alt="Poules" class="product-image">
+            <div class="product-info">
+                <h3>Poulet de Chair</h3>
+                <p>Poulets élevés en plein air, 2.5 à 3 kg. Chair tendre et savoureuse.</p>
+                <span class="price">10$ / pièce</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20commande%20poulet%20de%20chair%202.5-3kg" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="1AA39246-1997-4FF4-B3EC-892A1673D9B8.png" alt="Œufs" class="product-image">
+            <div class="product-info">
+                <h3>Œufs Frais</h3>
+                <p>Œufs frais du jour, de poules élevées en plein air. Plateau de 30 pièces.</p>
+                <span class="price">6.50$ / plateau</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20je%20commande%20plateau%20d'œufs%206.5$" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Commander
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section hidden" id="porciculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="98285067-A0B0-4644-B65D-437EC8FED278.png" alt="Porcs engraissement" class="product-image">
+            <div class="product-info">
+                <h3>Porc d'Engraissement</h3>
+                <p>Porcs 40 à 60 kg, élevés dans de bonnes conditions sanitaires.</p>
+                <span class="price">5$ / kg vif</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20porc%20engraissement%2040-60kg" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="98285067-A0B0-4644-B65D-437EC8FED278.png" alt="Porcelets" class="product-image">
+            <div class="product-info">
+                <h3>Porcelets Sevrés</h3>
+                <p>Jeunes cochons 20 à 35 kg pour reproduction ou engraissement. Races améliorées.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20porcelets%2020-35kg" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="98285067-A0B0-4644-B65D-437EC8FED278.png" alt="Truie" class="product-image">
+            <div class="product-info">
+                <h3>Porc Adulte Reproduction</h3>
+                <p>Truies et verrats 100 kg et plus pour élevage et reproduction.</p>
+                <span class="price">Sur devis</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20porc%20reproduction%20100kg+" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-section hidden" id="agriculture">
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="289F2A87-B008-4E8D-9F16-60D3DF0F5E86.png" alt="Légumes" class="product-image">
+            <div class="product-info">
+                <h3>Légumes Frais Bio</h3>
+                <p>Tomates, salades, choux... Produits 100% bio de notre ferme.</p>
+                <span class="price">Prix selon commande</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20légumes%20disponibles%20et%20prix%20du%20jour" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="289F2A87-B008-4E8D-9F16-60D3DF0F5E86.png" alt="Maïs" class="product-image">
+            <div class="product-info">
+                <h3>Maïs</h3>
+                <p>Maïs cultivé localement, grains pleins et nourrissants.</p>
+                <span class="price">Prix selon commande</span>
+                <a href="https://wa.me/243831165687?text=Bonjour%20SOLAND%2C%20infos%20maïs%20et%20prix" class="product-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Demander prix
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function showCategory(category, element) {
+    document.querySelectorAll('.products-section').forEach(sec => {
+        sec.classList.add('hidden');
+    });
+    document.getElementById(category).classList.remove('hidden');
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    element.classList.add('active');
+}
+</script>
+
+</body>
+</html>
